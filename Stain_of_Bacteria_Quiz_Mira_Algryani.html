@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stain of Bacteria - Prepared by ANS. Mira Algryani</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+    background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 50%, #ffd6e4 100%);
+    color: #2c1620;
+    padding: 20px 14px;
+    line-height: 1.6;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  .header-card {
+    background: linear-gradient(135deg, #ad1457 0%, #d81b60 55%, #f06292 100%);
+    color: #ffffff;
+    border-radius: 24px;
+    padding: 34px 24px;
+    text-align: center;
+    box-shadow: 0 14px 36px rgba(173, 20, 87, 0.25);
+    margin-bottom: 20px;
+  }
+  .badge-lecture {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.22);
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .header-card h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+  }
+  .header-card p { font-size: 0.98rem; opacity: 0.95; margin-bottom: 16px; }
+  .author-ribbon {
+    display: inline-block;
+    background: #fff0f6;
+    color: #880e4f;
+    font-weight: 700;
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+  }
+  .stats-bar {
+    position: sticky;
+    top: 8px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1.5px solid #f8bbd0;
+    border-radius: 18px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(216, 27, 96, 0.12);
+  }
+  .stat-group { display: flex; gap: 10px; font-weight: 700; font-size: 0.9rem; }
+  .stat-pill { background: #fce4ec; color: #880e4f; padding: 6px 12px; border-radius: 12px; }
+  .btn-group { display: flex; gap: 8px; }
+  .btn {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .btn-primary { background: #d81b60; color: #fff; }
+  .btn-outline { background: #fff; color: #d81b60; border: 1.5px solid #d81b60; }
+  .question-card {
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 18px;
+    border: 1px solid #f8bbd0;
+    box-shadow: 0 10px 26px rgba(216, 27, 96, 0.1);
+  }
+  .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .q-number { font-weight: 700; color: #d81b60; font-size: 0.88rem; }
+  .difficulty-tag { font-size: 0.75rem; font-weight: 700; padding: 3px 11px; border-radius: 20px; }
+  .diff-medium { background: #fce4ec; color: #c2185b; }
+  .diff-hard { background: #880e4f; color: #ffffff; }
+  .q-text { font-size: 1.04rem; font-weight: 700; color: #2c1620; margin-bottom: 14px; }
+  .options-list { display: grid; gap: 10px; }
+  .option-btn {
+    width: 100%;
+    text-align: left;
+    background: #fff8fa;
+    border: 1.5px solid #f4c2d7;
+    border-radius: 14px;
+    padding: 12px 15px;
+    font-size: 0.94rem;
+    color: #2c1620;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .option-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #f8bbd0;
+    color: #880e4f;
+    font-weight: 700;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+  }
+  .option-btn.correct {
+    background: #e8f5e9 !important;
+    border-color: #2e7d32 !important;
+    color: #1b5e20 !important;
+    font-weight: 700;
+  }
+  .option-btn.correct .option-letter { background: #2e7d32; color: #fff; }
+  .option-btn.wrong {
+    background: #ffebee !important;
+    border-color: #c62828 !important;
+    color: #b71c1c !important;
+  }
+  .option-btn.wrong .option-letter { background: #c62828; color: #fff; }
+  .rationale-box {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #fff0f5;
+    border-left: 4px solid #d81b60;
+    font-size: 0.88rem;
+    color: #5c3a49;
+    display: none;
+  }
+  .footer-card {
+    text-align: center;
+    padding: 24px 18px;
+    margin-top: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 20px;
+    border: 1px solid #f8bbd0;
+    color: #880e4f;
+  }
+  .footer-card .copyright { font-family: Georgia, serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header-card">
+    <div class="badge-lecture">MICROBIOLOGY • LECTURE 5 BANK</div>
+    <h1>Stain of Bacteria</h1>
+    <p>60 Medium-to-Hard Interactive Multiple Choice Questions for Mastery</p>
+    <div class="author-ribbon">Prepared by ANS. Mira Algryani</div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-group">
+      <span class="stat-pill">Answered: <span id="answered-count">0</span> / 60</span>
+      <span class="stat-pill">Score: <span id="score-count">0</span></span>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="revealAll()">Reveal All Answers</button>
+      <button class="btn btn-primary" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+  </div>
+
+  <div id="quiz-container">
+    
+    <div class="question-card" id="q-card-0">
+      <div class="q-meta">
+        <span class="q-number">Question 1 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Why are unstained bacterial cells largely invisible when examined under a standard bright-field light microscope?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-0-0" onclick="selectOption(0, 0)">
+          <span class="option-letter">A</span>
+          <span>They lack cellular organelles</span>
+        </button>
+        <button class="option-btn" id="opt-0-1" onclick="selectOption(0, 1)">
+          <span class="option-letter">B</span>
+          <span>There is a lack of contrast between the cells and the surrounding medium</span>
+        </button>
+        <button class="option-btn" id="opt-0-2" onclick="selectOption(0, 2)">
+          <span class="option-letter">C</span>
+          <span>Their cell walls reflect all incident light</span>
+        </button>
+        <button class="option-btn" id="opt-0-3" onclick="selectOption(0, 3)">
+          <span class="option-letter">D</span>
+          <span>They move too rapidly to be resolved</span>
+        </button></div>
+      <div class="rationale-box" id="rat-0">
+        <strong>Scientific Explanation:</strong> Due to a lack of contrast, structural details of organisms cannot be seen under a light microscope without dyes.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-1">
+      <div class="q-meta">
+        <span class="q-number">Question 2 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which historical figure wrote quotes to the Royal Society of London in 1714 describing the staining of muscle fibers with saffron?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-1-0" onclick="selectOption(1, 0)">
+          <span class="option-letter">A</span>
+          <span>Joseph von Gerlach</span>
+        </button>
+        <button class="option-btn" id="opt-1-1" onclick="selectOption(1, 1)">
+          <span class="option-letter">B</span>
+          <span>Hans Christian Gram</span>
+        </button>
+        <button class="option-btn" id="opt-1-2" onclick="selectOption(1, 2)">
+          <span class="option-letter">C</span>
+          <span>Antonie van Leeuwenhoek</span>
+        </button>
+        <button class="option-btn" id="opt-1-3" onclick="selectOption(1, 3)">
+          <span class="option-letter">D</span>
+          <span>Paul Ehrlich</span>
+        </button></div>
+      <div class="rationale-box" id="rat-1">
+        <strong>Scientific Explanation:</strong> Leeuwenhoek wrote to the Royal Society of London in 1714 mentioning staining muscle fibers in saffron to increase visibility.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-2">
+      <div class="q-meta">
+        <span class="q-number">Question 3 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Who is widely regarded as the 'father of staining' for calling attention to the importance of staining in histology in 1858?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-2-0" onclick="selectOption(2, 0)">
+          <span class="option-letter">A</span>
+          <span>Gerlach</span>
+        </button>
+        <button class="option-btn" id="opt-2-1" onclick="selectOption(2, 1)">
+          <span class="option-letter">B</span>
+          <span>Leeuwenhoek</span>
+        </button>
+        <button class="option-btn" id="opt-2-2" onclick="selectOption(2, 2)">
+          <span class="option-letter">C</span>
+          <span>Schaefer</span>
+        </button>
+        <button class="option-btn" id="opt-2-3" onclick="selectOption(2, 3)">
+          <span class="option-letter">D</span>
+          <span>Leifson</span>
+        </button></div>
+      <div class="rationale-box" id="rat-2">
+        <strong>Scientific Explanation:</strong> Gerlach in 1858 called attention to the importance of staining in histology and is considered the father of staining.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-3">
+      <div class="q-meta">
+        <span class="q-number">Question 4 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which of the following correctly distinguishes a general 'dye' from a 'biological stain'?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-3-0" onclick="selectOption(3, 0)">
+          <span class="option-letter">A</span>
+          <span>Dyes contain benzene rings while stains do not</span>
+        </button>
+        <button class="option-btn" id="opt-3-1" onclick="selectOption(3, 1)">
+          <span class="option-letter">B</span>
+          <span>A dye is a general-purpose coloring agent, whereas a stain is specifically used for coloring biological material</span>
+        </button>
+        <button class="option-btn" id="opt-3-2" onclick="selectOption(3, 2)">
+          <span class="option-letter">C</span>
+          <span>Stains are exclusively inorganic while dyes are organic</span>
+        </button>
+        <button class="option-btn" id="opt-3-3" onclick="selectOption(3, 3)">
+          <span class="option-letter">D</span>
+          <span>Dyes require mordants whereas stains never require mordants</span>
+        </button></div>
+      <div class="rationale-box" id="rat-3">
+        <strong>Scientific Explanation:</strong> A dye is a general-purpose coloring agent, whereas a stain is used specifically for coloring biological material.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-4">
+      <div class="q-meta">
+        <span class="q-number">Question 5 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Chemically, a complete biological stain consists of a benzene ring attached to which two functional groups?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-4-0" onclick="selectOption(4, 0)">
+          <span class="option-letter">A</span>
+          <span>Carboxyl and hydroxyl groups</span>
+        </button>
+        <button class="option-btn" id="opt-4-1" onclick="selectOption(4, 1)">
+          <span class="option-letter">B</span>
+          <span>Chromophore and auxochrome groups</span>
+        </button>
+        <button class="option-btn" id="opt-4-2" onclick="selectOption(4, 2)">
+          <span class="option-letter">C</span>
+          <span>Aldehyde and ketone groups</span>
+        </button>
+        <button class="option-btn" id="opt-4-3" onclick="selectOption(4, 3)">
+          <span class="option-letter">D</span>
+          <span>Phosphate and amino groups</span>
+        </button></div>
+      <div class="rationale-box" id="rat-4">
+        <strong>Scientific Explanation:</strong> A stain is an organic compound containing a benzene ring plus a chromophore and an auxochrome group.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-5">
+      <div class="q-meta">
+        <span class="q-number">Question 6 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">If an organic compound possesses a benzene ring and a chromophore group, but lacks an auxochrome group, what is its limitation?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-5-0" onclick="selectOption(5, 0)">
+          <span class="option-letter">A</span>
+          <span>It will be completely colorless</span>
+        </button>
+        <button class="option-btn" id="opt-5-1" onclick="selectOption(5, 1)">
+          <span class="option-letter">B</span>
+          <span>It will have color (chromogen) but cannot ionize to form salts or bind firmly to fibers/tissues</span>
+        </button>
+        <button class="option-btn" id="opt-5-2" onclick="selectOption(5, 2)">
+          <span class="option-letter">C</span>
+          <span>It will act exclusively as a decolorizer</span>
+        </button>
+        <button class="option-btn" id="opt-5-3" onclick="selectOption(5, 3)">
+          <span class="option-letter">D</span>
+          <span>It will destroy bacterial nucleic acids</span>
+        </button></div>
+      <div class="rationale-box" id="rat-5">
+        <strong>Scientific Explanation:</strong> The auxochrome group conveys the property of ionization of the chromogen (ability to form salts) and enables binding to fibers or tissues.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-6">
+      <div class="q-meta">
+        <span class="q-number">Question 7 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Why are the majority of stains used directly to color bacterial cells classified as 'basic' (cationic) dyes?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-6-0" onclick="selectOption(6, 0)">
+          <span class="option-letter">A</span>
+          <span>Bacterial cell walls are strongly positively charged</span>
+        </button>
+        <button class="option-btn" id="opt-6-1" onclick="selectOption(6, 1)">
+          <span class="option-letter">B</span>
+          <span>Negatively charged nucleic acids and cell components attract positive dye ions</span>
+        </button>
+        <button class="option-btn" id="opt-6-2" onclick="selectOption(6, 2)">
+          <span class="option-letter">C</span>
+          <span>Basic stains only dissolve in strong acids</span>
+        </button>
+        <button class="option-btn" id="opt-6-3" onclick="selectOption(6, 3)">
+          <span class="option-letter">D</span>
+          <span>Basic stains neutralize bacterial endotoxins</span>
+        </button></div>
+      <div class="rationale-box" id="rat-6">
+        <strong>Scientific Explanation:</strong> Majority of stains used for staining bacteria are basic because the nucleic acid of bacterial cells attracts positive ions (e.g., methylene blue, crystal violet).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-7">
+      <div class="q-meta">
+        <span class="q-number">Question 8 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What is the primary application of acidic (anionic) stains in bacteriological microscopy?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-7-0" onclick="selectOption(7, 0)">
+          <span class="option-letter">A</span>
+          <span>Staining bacterial chromosomes directly</span>
+        </button>
+        <button class="option-btn" id="opt-7-1" onclick="selectOption(7, 1)">
+          <span class="option-letter">B</span>
+          <span>Background staining (negative staining)</span>
+        </button>
+        <button class="option-btn" id="opt-7-2" onclick="selectOption(7, 2)">
+          <span class="option-letter">C</span>
+          <span>Acting as a primary stain in Ziehl-Neelsen method</span>
+        </button>
+        <button class="option-btn" id="opt-7-3" onclick="selectOption(7, 3)">
+          <span class="option-letter">D</span>
+          <span>Penetrating endospore coats</span>
+        </button></div>
+      <div class="rationale-box" id="rat-7">
+        <strong>Scientific Explanation:</strong> Acidic stains carry negative charges and are repelled by negatively charged bacterial surfaces, making them ideal for background staining.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-8">
+      <div class="q-meta">
+        <span class="q-number">Question 9 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which chemical reagent forms an insoluble complex with a stain, fixing it or causing it to penetrate more deeply into the cell during indirect staining?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-8-0" onclick="selectOption(8, 0)">
+          <span class="option-letter">A</span>
+          <span>Decolorizer</span>
+        </button>
+        <button class="option-btn" id="opt-8-1" onclick="selectOption(8, 1)">
+          <span class="option-letter">B</span>
+          <span>Accentuator</span>
+        </button>
+        <button class="option-btn" id="opt-8-2" onclick="selectOption(8, 2)">
+          <span class="option-letter">C</span>
+          <span>Mordant</span>
+        </button>
+        <button class="option-btn" id="opt-8-3" onclick="selectOption(8, 3)">
+          <span class="option-letter">D</span>
+          <span>Counterstain</span>
+        </button></div>
+      <div class="rationale-box" id="rat-8">
+        <strong>Scientific Explanation:</strong> A mordant forms an insoluble complex with the stain and fixes it or causes deeper penetration (e.g., Gram's iodine, phenol in Ziehl-Neelsen).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-9">
+      <div class="q-meta">
+        <span class="q-number">Question 10 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">How does an 'accentuator' differ functionally from a 'mordant' in staining procedures?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-9-0" onclick="selectOption(9, 0)">
+          <span class="option-letter">A</span>
+          <span>An accentuator removes excess dye, while a mordant adds color</span>
+        </button>
+        <button class="option-btn" id="opt-9-1" onclick="selectOption(9, 1)">
+          <span class="option-letter">B</span>
+          <span>An accentuator makes the staining reaction more selective and intense without forming an insoluble dye complex</span>
+        </button>
+        <button class="option-btn" id="opt-9-2" onclick="selectOption(9, 2)">
+          <span class="option-letter">C</span>
+          <span>An accentuator is only used in negative staining</span>
+        </button>
+        <button class="option-btn" id="opt-9-3" onclick="selectOption(9, 3)">
+          <span class="option-letter">D</span>
+          <span>An accentuator replaces the primary dye</span>
+        </button></div>
+      <div class="rationale-box" id="rat-9">
+        <strong>Scientific Explanation:</strong> An accentuator is a chemical added to a stain to make the reaction more selective and intense, whereas a mordant forms an insoluble complex to fix the dye.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-10">
+      <div class="q-meta">
+        <span class="q-number">Question 11 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">In indirect regressive staining methods, what is the specific role of a decolorizer such as ethanol?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-10-0" onclick="selectOption(10, 0)">
+          <span class="option-letter">A</span>
+          <span>To increase the pH of bacterial proteins</span>
+        </button>
+        <button class="option-btn" id="opt-10-1" onclick="selectOption(10, 1)">
+          <span class="option-letter">B</span>
+          <span>To remove excess stain from specific cellular structures</span>
+        </button>
+        <button class="option-btn" id="opt-10-2" onclick="selectOption(10, 2)">
+          <span class="option-letter">C</span>
+          <span>To polymerize the benzene ring of the chromogen</span>
+        </button>
+        <button class="option-btn" id="opt-10-3" onclick="selectOption(10, 3)">
+          <span class="option-letter">D</span>
+          <span>To act as a contrasting background dye</span>
+        </button></div>
+      <div class="rationale-box" id="rat-10">
+        <strong>Scientific Explanation:</strong> A decolorizer is a chemical used to remove excess stain in indirect regressive staining, such as ethanol in Gram staining.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-11">
+      <div class="q-meta">
+        <span class="q-number">Question 12 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Before the introduction of synthetic aniline dyes in 1856, which natural stain was commonly used in microscopy?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-11-0" onclick="selectOption(11, 0)">
+          <span class="option-letter">A</span>
+          <span>Malachite green</span>
+        </button>
+        <button class="option-btn" id="opt-11-1" onclick="selectOption(11, 1)">
+          <span class="option-letter">B</span>
+          <span>Carmine</span>
+        </button>
+        <button class="option-btn" id="opt-11-2" onclick="selectOption(11, 2)">
+          <span class="option-letter">C</span>
+          <span>Nigrosine</span>
+        </button>
+        <button class="option-btn" id="opt-11-3" onclick="selectOption(11, 3)">
+          <span class="option-letter">D</span>
+          <span>Safranin</span>
+        </button></div>
+      <div class="rationale-box" id="rat-11">
+        <strong>Scientific Explanation:</strong> Natural stains such as carmine were used in microscopy before 1850, prior to aniline dyes in 1856.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-12">
+      <div class="q-meta">
+        <span class="q-number">Question 13 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which of the following is NOT listed as a standard simple staining solution?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-12-0" onclick="selectOption(12, 0)">
+          <span class="option-letter">A</span>
+          <span>Carbol fuchsin</span>
+        </button>
+        <button class="option-btn" id="opt-12-1" onclick="selectOption(12, 1)">
+          <span class="option-letter">B</span>
+          <span>Crystal violet</span>
+        </button>
+        <button class="option-btn" id="opt-12-2" onclick="selectOption(12, 2)">
+          <span class="option-letter">C</span>
+          <span>Methylene blue</span>
+        </button>
+        <button class="option-btn" id="opt-12-3" onclick="selectOption(12, 3)">
+          <span class="option-letter">D</span>
+          <span>India ink</span>
+        </button></div>
+      <div class="rationale-box" id="rat-12">
+        <strong>Scientific Explanation:</strong> Simple staining solutions include carbol fuchsin, crystal violet, methylene blue, and safranin. India ink is used for negative/capsule staining.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-13">
+      <div class="q-meta">
+        <span class="q-number">Question 14 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">In a simple staining procedure, a single dye is dissolved in which type of solvent?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-13-0" onclick="selectOption(13, 0)">
+          <span class="option-letter">A</span>
+          <span>Concentrated hydrochloric acid</span>
+        </button>
+        <button class="option-btn" id="opt-13-1" onclick="selectOption(13, 1)">
+          <span class="option-letter">B</span>
+          <span>Either a dilute alcoholic solution or water</span>
+        </button>
+        <button class="option-btn" id="opt-13-2" onclick="selectOption(13, 2)">
+          <span class="option-letter">C</span>
+          <span>Pure acetone</span>
+        </button>
+        <button class="option-btn" id="opt-13-3" onclick="selectOption(13, 3)">
+          <span class="option-letter">D</span>
+          <span>100% xylene</span>
+        </button></div>
+      <div class="rationale-box" id="rat-13">
+        <strong>Scientific Explanation:</strong> Simple staining solutions contain only one dye dissolved in either a dilute alcoholic solution or water.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-14">
+      <div class="q-meta">
+        <span class="q-number">Question 15 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which of the following objectives CANNOT be achieved using a simple stain alone?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-14-0" onclick="selectOption(14, 0)">
+          <span class="option-letter">A</span>
+          <span>Determining bacterial shape and arrangement</span>
+        </button>
+        <button class="option-btn" id="opt-14-1" onclick="selectOption(14, 1)">
+          <span class="option-letter">B</span>
+          <span>Distinguishing bacterial cells from nonliving debris</span>
+        </button>
+        <button class="option-btn" id="opt-14-2" onclick="selectOption(14, 2)">
+          <span class="option-letter">C</span>
+          <span>Separating bacteria into Gram-positive and Gram-negative groups</span>
+        </button>
+        <button class="option-btn" id="opt-14-3" onclick="selectOption(14, 3)">
+          <span class="option-letter">D</span>
+          <span>Estimating relative bacterial cell size</span>
+        </button></div>
+      <div class="rationale-box" id="rat-14">
+        <strong>Scientific Explanation:</strong> Simple stains color all cells uniformly and cannot differentiate bacteria based on cell wall composition (like Gram reaction).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-15">
+      <div class="q-meta">
+        <span class="q-number">Question 16 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">Staining of bacteria involves both physical and chemical processes. Which combination represents purely PHYSICAL factors involved in dye uptake?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-15-0" onclick="selectOption(15, 0)">
+          <span class="option-letter">A</span>
+          <span>pH of bacterial protein and chemical structure of the cell wall</span>
+        </button>
+        <button class="option-btn" id="opt-15-1" onclick="selectOption(15, 1)">
+          <span class="option-letter">B</span>
+          <span>Osmosis, diffusion, adsorption, and surface attraction</span>
+        </button>
+        <button class="option-btn" id="opt-15-2" onclick="selectOption(15, 2)">
+          <span class="option-letter">C</span>
+          <span>Salt formation between auxochrome and nucleic acid</span>
+        </button>
+        <button class="option-btn" id="opt-15-3" onclick="selectOption(15, 3)">
+          <span class="option-letter">D</span>
+          <span>Degree of chemical reaction between dye and peptidoglycan</span>
+        </button></div>
+      <div class="rationale-box" id="rat-15">
+        <strong>Scientific Explanation:</strong> Surface attraction, osmosis, adsorption, diffusion, and size of the dye molecule represent physical aspects, whereas protein pH and cell wall chemical reactions are chemical.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-16">
+      <div class="q-meta">
+        <span class="q-number">Question 17 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">According to the lecture examples, if a smear of Bacillus cereus is stained with safranin and Escherichia coli with crystal violet, what color will each appear?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-16-0" onclick="selectOption(16, 0)">
+          <span class="option-letter">A</span>
+          <span>Both appear purple</span>
+        </button>
+        <button class="option-btn" id="opt-16-1" onclick="selectOption(16, 1)">
+          <span class="option-letter">B</span>
+          <span>Bacillus cereus appears red/pink, and Escherichia coli appears violet/purple</span>
+        </button>
+        <button class="option-btn" id="opt-16-2" onclick="selectOption(16, 2)">
+          <span class="option-letter">C</span>
+          <span>Bacillus cereus appears violet, and Escherichia coli appears colorless</span>
+        </button>
+        <button class="option-btn" id="opt-16-3" onclick="selectOption(16, 3)">
+          <span class="option-letter">D</span>
+          <span>Both appear blue</span>
+        </button></div>
+      <div class="rationale-box" id="rat-16">
+        <strong>Scientific Explanation:</strong> In simple staining, bacterial cells simply take the color of the dye applied (safranin = red; crystal violet = violet).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-17">
+      <div class="q-meta">
+        <span class="q-number">Question 18 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Who developed the Gram staining technique, and in what year?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-17-0" onclick="selectOption(17, 0)">
+          <span class="option-letter">A</span>
+          <span>Hans Christian Gram in 1883</span>
+        </button>
+        <button class="option-btn" id="opt-17-1" onclick="selectOption(17, 1)">
+          <span class="option-letter">B</span>
+          <span>Ziehl and Neelsen in 1882</span>
+        </button>
+        <button class="option-btn" id="opt-17-2" onclick="selectOption(17, 2)">
+          <span class="option-letter">C</span>
+          <span>Schaefer and Fulton in 1933</span>
+        </button>
+        <button class="option-btn" id="opt-17-3" onclick="selectOption(17, 3)">
+          <span class="option-letter">D</span>
+          <span>Joseph von Gerlach in 1858</span>
+        </button></div>
+      <div class="rationale-box" id="rat-17">
+        <strong>Scientific Explanation:</strong> The Gram staining reaction was developed in 1883 by Hans Christian Gram, a Danish physician.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-18">
+      <div class="q-meta">
+        <span class="q-number">Question 19 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">What is the exact sequence and standard timing shown in the lecture diagram for the four reagents of the Gram stain?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-18-0" onclick="selectOption(18, 0)">
+          <span class="option-letter">A</span>
+          <span>Crystal violet (1 min) -> Iodine (1 min) -> Alcohol (10 sec) -> Safranin (1 min)</span>
+        </button>
+        <button class="option-btn" id="opt-18-1" onclick="selectOption(18, 1)">
+          <span class="option-letter">B</span>
+          <span>Safranin (1 min) -> Alcohol (1 min) -> Iodine (10 sec) -> Crystal violet (1 min)</span>
+        </button>
+        <button class="option-btn" id="opt-18-2" onclick="selectOption(18, 2)">
+          <span class="option-letter">C</span>
+          <span>Crystal violet (5 min) -> Acid-alcohol (10 sec) -> Iodine (1 min) -> Methylene blue (1 min)</span>
+        </button>
+        <button class="option-btn" id="opt-18-3" onclick="selectOption(18, 3)">
+          <span class="option-letter">D</span>
+          <span>Crystal violet (10 sec) -> Iodine (1 min) -> Alcohol (1 min) -> Safranin (5 min)</span>
+        </button></div>
+      <div class="rationale-box" id="rat-18">
+        <strong>Scientific Explanation:</strong> According to the lecture protocol diagram: Crystal violet (1 min), Iodine (1 min), Alcohol (10 sec), Safranin (1 min).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-19">
+      <div class="q-meta">
+        <span class="q-number">Question 20 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What is the chemical nature of the mordant used in the Gram staining procedure?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-19-0" onclick="selectOption(19, 0)">
+          <span class="option-letter">A</span>
+          <span>5% aqueous phenol</span>
+        </button>
+        <button class="option-btn" id="opt-19-1" onclick="selectOption(19, 1)">
+          <span class="option-letter">B</span>
+          <span>Iodine-potassium-iodide solution</span>
+        </button>
+        <button class="option-btn" id="opt-19-2" onclick="selectOption(19, 2)">
+          <span class="option-letter">C</span>
+          <span>Acidified ethanol</span>
+        </button>
+        <button class="option-btn" id="opt-19-3" onclick="selectOption(19, 3)">
+          <span class="option-letter">D</span>
+          <span>3% hydrochloric acid</span>
+        </button></div>
+      <div class="rationale-box" id="rat-19">
+        <strong>Scientific Explanation:</strong> In Gram staining, primary dye crystal violet is followed by an iodine-potassium-iodide solution acting as a mordant.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-20">
+      <div class="q-meta">
+        <span class="q-number">Question 21 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which reagent is used as the decolorizing agent in the Gram stain?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-20-0" onclick="selectOption(20, 0)">
+          <span class="option-letter">A</span>
+          <span>3% HCl in ethanol</span>
+        </button>
+        <button class="option-btn" id="opt-20-1" onclick="selectOption(20, 1)">
+          <span class="option-letter">B</span>
+          <span>Ethyl alcohol or a mixture of acetone and alcohol</span>
+        </button>
+        <button class="option-btn" id="opt-20-2" onclick="selectOption(20, 2)">
+          <span class="option-letter">C</span>
+          <span>Distilled water</span>
+        </button>
+        <button class="option-btn" id="opt-20-3" onclick="selectOption(20, 3)">
+          <span class="option-letter">D</span>
+          <span>5% malachite green</span>
+        </button></div>
+      <div class="rationale-box" id="rat-20">
+        <strong>Scientific Explanation:</strong> The decolorizing agent in Gram staining is ethyl alcohol or a mixture of acetone and alcohol.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-21">
+      <div class="q-meta">
+        <span class="q-number">Question 22 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">Immediately AFTER the alcohol decolorization step (and BEFORE applying safranin), what color are Gram-positive and Gram-negative bacteria respectively?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-21-0" onclick="selectOption(21, 0)">
+          <span class="option-letter">A</span>
+          <span>Gram-positive: colorless; Gram-negative: violet</span>
+        </button>
+        <button class="option-btn" id="opt-21-1" onclick="selectOption(21, 1)">
+          <span class="option-letter">B</span>
+          <span>Gram-positive: violet/blue; Gram-negative: colorless</span>
+        </button>
+        <button class="option-btn" id="opt-21-2" onclick="selectOption(21, 2)">
+          <span class="option-letter">C</span>
+          <span>Gram-positive: red; Gram-negative: blue</span>
+        </button>
+        <button class="option-btn" id="opt-21-3" onclick="selectOption(21, 3)">
+          <span class="option-letter">D</span>
+          <span>Both remain violet until safranin is added</span>
+        </button></div>
+      <div class="rationale-box" id="rat-21">
+        <strong>Scientific Explanation:</strong> Gram-positive bacteria resist decolorization and remain violet/blue, while Gram-negative bacteria lose the purple color and become colorless prior to counterstaining.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-22">
+      <div class="q-meta">
+        <span class="q-number">Question 23 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">If a student accidentally omits the Gram's iodine step during a Gram stain of Staphylococcus aureus (Gram-positive) and E. coli (Gram-negative), what will be the final microscopic result?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-22-0" onclick="selectOption(22, 0)">
+          <span class="option-letter">A</span>
+          <span>Both will appear purple</span>
+        </button>
+        <button class="option-btn" id="opt-22-1" onclick="selectOption(22, 1)">
+          <span class="option-letter">B</span>
+          <span>Both will appear red/pink</span>
+        </button>
+        <button class="option-btn" id="opt-22-2" onclick="selectOption(22, 2)">
+          <span class="option-letter">C</span>
+          <span>Staphylococcus will be green and E. coli will be purple</span>
+        </button>
+        <button class="option-btn" id="opt-22-3" onclick="selectOption(22, 3)">
+          <span class="option-letter">D</span>
+          <span>Both will remain completely colorless</span>
+        </button></div>
+      <div class="rationale-box" id="rat-22">
+        <strong>Scientific Explanation:</strong> Without the iodine mordant, the crystal violet-iodine complex does not form; alcohol washes crystal violet out of both cell types, and both take up the red safranin counterstain.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-23">
+      <div class="q-meta">
+        <span class="q-number">Question 24 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">If a technician forgets to apply the safranin counterstain at the end of a properly executed Gram stain, how will Gram-negative rods appear?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-23-0" onclick="selectOption(23, 0)">
+          <span class="option-letter">A</span>
+          <span>Deep purple</span>
+        </button>
+        <button class="option-btn" id="opt-23-1" onclick="selectOption(23, 1)">
+          <span class="option-letter">B</span>
+          <span>Bright red</span>
+        </button>
+        <button class="option-btn" id="opt-23-2" onclick="selectOption(23, 2)">
+          <span class="option-letter">C</span>
+          <span>Colorless / invisible</span>
+        </button>
+        <button class="option-btn" id="opt-23-3" onclick="selectOption(23, 3)">
+          <span class="option-letter">D</span>
+          <span>Blue</span>
+        </button></div>
+      <div class="rationale-box" id="rat-23">
+        <strong>Scientific Explanation:</strong> Gram-negative bacteria are decolorized by alcohol and rely entirely on the counterstain (safranin) to become visible.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-24">
+      <div class="q-meta">
+        <span class="q-number">Question 25 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">Which category of bacteria fails to stain or stains only poorly with the standard Gram stain due to unusual cell envelope properties?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-24-0" onclick="selectOption(24, 0)">
+          <span class="option-letter">A</span>
+          <span>Gram-variable bacteria</span>
+        </button>
+        <button class="option-btn" id="opt-24-1" onclick="selectOption(24, 1)">
+          <span class="option-letter">B</span>
+          <span>Gram-non-reactive bacteria (e.g., Mycobacterium spp. and Spirochetes)</span>
+        </button>
+        <button class="option-btn" id="opt-24-2" onclick="selectOption(24, 2)">
+          <span class="option-letter">C</span>
+          <span>Endospore-forming bacilli</span>
+        </button>
+        <button class="option-btn" id="opt-24-3" onclick="selectOption(24, 3)">
+          <span class="option-letter">D</span>
+          <span>Capsulated cocci</span>
+        </button></div>
+      <div class="rationale-box" id="rat-24">
+        <strong>Scientific Explanation:</strong> Gram-non-reactive microorganisms do not stain or stain only poorly with Gram stain; examples include Mycobacterium spp. and various Spirochetes.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-25">
+      <div class="q-meta">
+        <span class="q-number">Question 26 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What characterizes 'Gram-variable' bacteria when observed under the microscope?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-25-0" onclick="selectOption(25, 0)">
+          <span class="option-letter">A</span>
+          <span>They appear green under bright-field microscopy</span>
+        </button>
+        <button class="option-btn" id="opt-25-1" onclick="selectOption(25, 1)">
+          <span class="option-letter">B</span>
+          <span>They exhibit both Gram-positive and Gram-negative cells on the same slide</span>
+        </button>
+        <button class="option-btn" id="opt-25-2" onclick="selectOption(25, 2)">
+          <span class="option-letter">C</span>
+          <span>They only stain with acidic dyes</span>
+        </button>
+        <button class="option-btn" id="opt-25-3" onclick="selectOption(25, 3)">
+          <span class="option-letter">D</span>
+          <span>They lose their cell wall upon heat fixation</span>
+        </button></div>
+      <div class="rationale-box" id="rat-25">
+        <strong>Scientific Explanation:</strong> Gram-variable bacteria appear as a mixture of Gram-positive and Gram-negative cells on the same slide.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-26">
+      <div class="q-meta">
+        <span class="q-number">Question 27 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">All of the following technical errors can artificially induce Gram-variability EXCEPT:</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-26-0" onclick="selectOption(26, 0)">
+          <span class="option-letter">A</span>
+          <span>Use of old bacterial cultures</span>
+        </button>
+        <button class="option-btn" id="opt-26-1" onclick="selectOption(26, 1)">
+          <span class="option-letter">B</span>
+          <span>Over-heating when fixing the smear</span>
+        </button>
+        <button class="option-btn" id="opt-26-2" onclick="selectOption(26, 2)">
+          <span class="option-letter">C</span>
+          <span>Presence of bacteria in low pH media</span>
+        </button>
+        <button class="option-btn" id="opt-26-3" onclick="selectOption(26, 3)">
+          <span class="option-letter">D</span>
+          <span>Using fresh log-phase cultures with precise 10-second decolorization</span>
+        </button></div>
+      <div class="rationale-box" id="rat-26">
+        <strong>Scientific Explanation:</strong> Improper techniques causing Gram-variability include improper decolorization, thick smears, old cultures, low pH media, autolysis enzymes, and over-heating during fixation.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-27">
+      <div class="q-meta">
+        <span class="q-number">Question 28 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">How does exposure to autolysis enzymes affect the Gram reaction of a Gram-positive culture?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-27-0" onclick="selectOption(27, 0)">
+          <span class="option-letter">A</span>
+          <span>It intensifies the purple color</span>
+        </button>
+        <button class="option-btn" id="opt-27-1" onclick="selectOption(27, 1)">
+          <span class="option-letter">B</span>
+          <span>It degrades the cell wall, causing some cells to lose crystal violet and appear Gram-negative (Gram-variable)</span>
+        </button>
+        <button class="option-btn" id="opt-27-2" onclick="selectOption(27, 2)">
+          <span class="option-letter">C</span>
+          <span>It converts safranin into crystal violet</span>
+        </button>
+        <button class="option-btn" id="opt-27-3" onclick="selectOption(27, 3)">
+          <span class="option-letter">D</span>
+          <span>It prevents heat fixation</span>
+        </button></div>
+      <div class="rationale-box" id="rat-27">
+        <strong>Scientific Explanation:</strong> Subjecting bacteria to autolysis enzymes damages cell wall integrity, leading to inconsistent dye retention and Gram-variable results.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-28">
+      <div class="q-meta">
+        <span class="q-number">Question 29 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">Why does preparing an overly thick bacterial smear lead to erroneous Gram stain results?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-28-0" onclick="selectOption(28, 0)">
+          <span class="option-letter">A</span>
+          <span>Safranin cannot penetrate thick smears</span>
+        </button>
+        <button class="option-btn" id="opt-28-1" onclick="selectOption(28, 1)">
+          <span class="option-letter">B</span>
+          <span>The decolorizer cannot evenly reach all cells, causing Gram-negative cells to retain crystal violet</span>
+        </button>
+        <button class="option-btn" id="opt-28-2" onclick="selectOption(28, 2)">
+          <span class="option-letter">C</span>
+          <span>Iodine evaporates too quickly</span>
+        </button>
+        <button class="option-btn" id="opt-28-3" onclick="selectOption(28, 3)">
+          <span class="option-letter">D</span>
+          <span>Thick smears dissolve in water</span>
+        </button></div>
+      <div class="rationale-box" id="rat-28">
+        <strong>Scientific Explanation:</strong> Thick smears prevent uniform decolorization by alcohol, leading to false Gram-positive or Gram-variable appearances.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-29">
+      <div class="q-meta">
+        <span class="q-number">Question 30 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which two bacterial genera are specifically highlighted in the lecture as requiring the Acid-Fast stain due to their waxy cell walls?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-29-0" onclick="selectOption(29, 0)">
+          <span class="option-letter">A</span>
+          <span>Bacillus and Clostridium</span>
+        </button>
+        <button class="option-btn" id="opt-29-1" onclick="selectOption(29, 1)">
+          <span class="option-letter">B</span>
+          <span>Mycobacterium and Nocardia</span>
+        </button>
+        <button class="option-btn" id="opt-29-2" onclick="selectOption(29, 2)">
+          <span class="option-letter">C</span>
+          <span>Escherichia and Salmonella</span>
+        </button>
+        <button class="option-btn" id="opt-29-3" onclick="selectOption(29, 3)">
+          <span class="option-letter">D</span>
+          <span>Staphylococcus and Streptococcus</span>
+        </button></div>
+      <div class="rationale-box" id="rat-29">
+        <strong>Scientific Explanation:</strong> Mycobacterium and Nocardia have cell walls with substantial fatty/waxy substances (mycolic acid) requiring acid-fast staining.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-30">
+      <div class="q-meta">
+        <span class="q-number">Question 31 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What specific lipid fraction in the cell wall of acid-fast bacteria prevents penetration by ordinary aqueous dyes?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-30-0" onclick="selectOption(30, 0)">
+          <span class="option-letter">A</span>
+          <span>Lipopolysaccharide (LPS)</span>
+        </button>
+        <button class="option-btn" id="opt-30-1" onclick="selectOption(30, 1)">
+          <span class="option-letter">B</span>
+          <span>Mycolic acid</span>
+        </button>
+        <button class="option-btn" id="opt-30-2" onclick="selectOption(30, 2)">
+          <span class="option-letter">C</span>
+          <span>Teichoic acid</span>
+        </button>
+        <button class="option-btn" id="opt-30-3" onclick="selectOption(30, 3)">
+          <span class="option-letter">D</span>
+          <span>Phosphatidylcholine</span>
+        </button></div>
+      <div class="rationale-box" id="rat-30">
+        <strong>Scientific Explanation:</strong> Acid-fast bacteria contain substantial quantities of fatty or waxy substances, particularly a lipid fraction called mycolic acid.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-31">
+      <div class="q-meta">
+        <span class="q-number">Question 32 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">In the Ziehl-Neelsen method, what serves as the primary stain and how long is it applied with gentle steaming?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-31-0" onclick="selectOption(31, 0)">
+          <span class="option-letter">A</span>
+          <span>Crystal violet for 1 minute</span>
+        </button>
+        <button class="option-btn" id="opt-31-1" onclick="selectOption(31, 1)">
+          <span class="option-letter">B</span>
+          <span>Strong carbol-fuchsin for approximately 5 minutes</span>
+        </button>
+        <button class="option-btn" id="opt-31-2" onclick="selectOption(31, 2)">
+          <span class="option-letter">C</span>
+          <span>5% malachite green for 10 minutes</span>
+        </button>
+        <button class="option-btn" id="opt-31-3" onclick="selectOption(31, 3)">
+          <span class="option-letter">D</span>
+          <span>Methylene blue for 2 minutes</span>
+        </button></div>
+      <div class="rationale-box" id="rat-31">
+        <strong>Scientific Explanation:</strong> Strong carbol-fuchsin is applied to a heat-fixed smear for approx. 5 minutes with heating/steaming.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-32">
+      <div class="q-meta">
+        <span class="q-number">Question 33 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Why must additional strong carbol-fuchsin be added during the heating step of the Ziehl-Neelsen procedure?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-32-0" onclick="selectOption(32, 0)">
+          <span class="option-letter">A</span>
+          <span>To neutralize mycolic acid</span>
+        </button>
+        <button class="option-btn" id="opt-32-1" onclick="selectOption(32, 1)">
+          <span class="option-letter">B</span>
+          <span>To prevent the smear from drying out during heating</span>
+        </button>
+        <button class="option-btn" id="opt-32-2" onclick="selectOption(32, 2)">
+          <span class="option-letter">C</span>
+          <span>To decolorize non-acid-fast cells</span>
+        </button>
+        <button class="option-btn" id="opt-32-3" onclick="selectOption(32, 3)">
+          <span class="option-letter">D</span>
+          <span>To cool down the glass slide</span>
+        </button></div>
+      <div class="rationale-box" id="rat-32">
+        <strong>Scientific Explanation:</strong> More dye is added as needed during heating to prevent drying, which would otherwise cause dye precipitation artifacts.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-33">
+      <div class="q-meta">
+        <span class="q-number">Question 34 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">What acts as the physical 'mordant' in the Ziehl-Neelsen acid-fast staining diagram alongside phenol in the carbol-fuchsin?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-33-0" onclick="selectOption(33, 0)">
+          <span class="option-letter">A</span>
+          <span>Application of heat (steaming)</span>
+        </button>
+        <button class="option-btn" id="opt-33-1" onclick="selectOption(33, 1)">
+          <span class="option-letter">B</span>
+          <span>Addition of Gram's iodine</span>
+        </button>
+        <button class="option-btn" id="opt-33-2" onclick="selectOption(33, 2)">
+          <span class="option-letter">C</span>
+          <span>Exposure to UV light</span>
+        </button>
+        <button class="option-btn" id="opt-33-3" onclick="selectOption(33, 3)">
+          <span class="option-letter">D</span>
+          <span>Washing with cold acetone</span>
+        </button></div>
+      <div class="rationale-box" id="rat-33">
+        <strong>Scientific Explanation:</strong> Step 2 in the Ziehl-Neelsen process diagram explicitly identifies 'Application of heat' (steaming) as the mordant driving carbol-fuchsin through the waxy wall (alongside phenol).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-34">
+      <div class="q-meta">
+        <span class="q-number">Question 35 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What decolorizing agent is used in the standard Ziehl-Neelsen acid-fast stain?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-34-0" onclick="selectOption(34, 0)">
+          <span class="option-letter">A</span>
+          <span>95% pure ethanol</span>
+        </button>
+        <button class="option-btn" id="opt-34-1" onclick="selectOption(34, 1)">
+          <span class="option-letter">B</span>
+          <span>Acid-alcohol</span>
+        </button>
+        <button class="option-btn" id="opt-34-2" onclick="selectOption(34, 2)">
+          <span class="option-letter">C</span>
+          <span>Distilled water</span>
+        </button>
+        <button class="option-btn" id="opt-34-3" onclick="selectOption(34, 3)">
+          <span class="option-letter">D</span>
+          <span>Acetone only</span>
+        </button></div>
+      <div class="rationale-box" id="rat-34">
+        <strong>Scientific Explanation:</strong> Acid-alcohol is the decolorizing agent applied until all traces of red color disappear from the smear.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-35">
+      <div class="q-meta">
+        <span class="q-number">Question 36 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">According to the important note (N.B.) in the lecture, how should decolorization be performed in the Ziehl-Neelsen method?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-35-0" onclick="selectOption(35, 0)">
+          <span class="option-letter">A</span>
+          <span>By flooding continuously with acid-alcohol for 10 minutes in a single stage</span>
+        </button>
+        <button class="option-btn" id="opt-35-1" onclick="selectOption(35, 1)">
+          <span class="option-letter">B</span>
+          <span>Not in one stage; use intermittent washings in water and reapplication of acid-alcohol</span>
+        </button>
+        <button class="option-btn" id="opt-35-2" onclick="selectOption(35, 2)">
+          <span class="option-letter">C</span>
+          <span>By boiling the slide in acid-alcohol</span>
+        </button>
+        <button class="option-btn" id="opt-35-3" onclick="selectOption(35, 3)">
+          <span class="option-letter">D</span>
+          <span>By wiping the slide with alcohol-soaked tissue</span>
+        </button></div>
+      <div class="rationale-box" id="rat-35">
+        <strong>Scientific Explanation:</strong> N.B.: Decolorization should not be attempted in one stage; there should be intermittent washings in water and reapplication of acid-alcohol.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-36">
+      <div class="q-meta">
+        <span class="q-number">Question 37 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What is the final color of acid-fast cells and non-acid-fast cells respectively after counterstaining with methylene blue?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-36-0" onclick="selectOption(36, 0)">
+          <span class="option-letter">A</span>
+          <span>Acid-fast: blue; Non-acid-fast: red</span>
+        </button>
+        <button class="option-btn" id="opt-36-1" onclick="selectOption(36, 1)">
+          <span class="option-letter">B</span>
+          <span>Acid-fast: red; Non-acid-fast: blue</span>
+        </button>
+        <button class="option-btn" id="opt-36-2" onclick="selectOption(36, 2)">
+          <span class="option-letter">C</span>
+          <span>Acid-fast: green; Non-acid-fast: red</span>
+        </button>
+        <button class="option-btn" id="opt-36-3" onclick="selectOption(36, 3)">
+          <span class="option-letter">D</span>
+          <span>Acid-fast: purple; Non-acid-fast: colorless</span>
+        </button></div>
+      <div class="rationale-box" id="rat-36">
+        <strong>Scientific Explanation:</strong> On microscopic examination, acid-fast cells retain carbol-fuchsin (red) and non-acid-fast cells take up the counterstain (blue).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-37">
+      <div class="q-meta">
+        <span class="q-number">Question 38 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">If a sputum smear containing Mycobacterium tuberculosis is stained using the Ziehl-Neelsen method, but the technician forgets to apply heat during the primary stain step, what is the most likely outcome?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-37-0" onclick="selectOption(37, 0)">
+          <span class="option-letter">A</span>
+          <span>Mycobacterium will stain bright green</span>
+        </button>
+        <button class="option-btn" id="opt-37-1" onclick="selectOption(37, 1)">
+          <span class="option-letter">B</span>
+          <span>Carbol-fuchsin will fail to penetrate the waxy mycolic acid layer, causing Mycobacterium to stain blue (false negative)</span>
+        </button>
+        <button class="option-btn" id="opt-37-2" onclick="selectOption(37, 2)">
+          <span class="option-letter">C</span>
+          <span>Non-acid-fast cells will stain bright red</span>
+        </button>
+        <button class="option-btn" id="opt-37-3" onclick="selectOption(37, 3)">
+          <span class="option-letter">D</span>
+          <span>The smear will wash off the slide</span>
+        </button></div>
+      <div class="rationale-box" id="rat-37">
+        <strong>Scientific Explanation:</strong> Without heat to soften/penetrate the waxy mycolic acid wall, carbol-fuchsin cannot enter the acid-fast bacilli, so they take up methylene blue.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-38">
+      <div class="q-meta">
+        <span class="q-number">Question 39 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which two bacterial genera are classically studied for producing highly resistant endospores?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-38-0" onclick="selectOption(38, 0)">
+          <span class="option-letter">A</span>
+          <span>Mycobacterium and Nocardia</span>
+        </button>
+        <button class="option-btn" id="opt-38-1" onclick="selectOption(38, 1)">
+          <span class="option-letter">B</span>
+          <span>Bacillus and Clostridium</span>
+        </button>
+        <button class="option-btn" id="opt-38-2" onclick="selectOption(38, 2)">
+          <span class="option-letter">C</span>
+          <span>Spirochetes and Vibrio</span>
+        </button>
+        <button class="option-btn" id="opt-38-3" onclick="selectOption(38, 3)">
+          <span class="option-letter">D</span>
+          <span>Neisseria and Haemophilus</span>
+        </button></div>
+      <div class="rationale-box" id="rat-38">
+        <strong>Scientific Explanation:</strong> Bacterial spores of the genera Bacillus and Clostridium are known for their high resistance and endospore formation.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-39">
+      <div class="q-meta">
+        <span class="q-number">Question 40 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Why are bacterial endospores resistant to standard staining methods like Gram or simple staining?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-39-0" onclick="selectOption(39, 0)">
+          <span class="option-letter">A</span>
+          <span>They lack nucleic acids</span>
+        </button>
+        <button class="option-btn" id="opt-39-1" onclick="selectOption(39, 1)">
+          <span class="option-letter">B</span>
+          <span>They possess relatively impermeable spore coats that resist dye penetration</span>
+        </button>
+        <button class="option-btn" id="opt-39-2" onclick="selectOption(39, 2)">
+          <span class="option-letter">C</span>
+          <span>They dissolve immediately in aqueous dyes</span>
+        </button>
+        <button class="option-btn" id="opt-39-3" onclick="selectOption(39, 3)">
+          <span class="option-letter">D</span>
+          <span>They are negatively charged on the inside and positively charged on the outside</span>
+        </button></div>
+      <div class="rationale-box" id="rat-39">
+        <strong>Scientific Explanation:</strong> Endospores possess tough, relatively impermeable spore coats requiring steaming to enhance dye penetration.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-40">
+      <div class="q-meta">
+        <span class="q-number">Question 41 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What is the most commonly employed procedure for staining bacterial endospores?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-40-0" onclick="selectOption(40, 0)">
+          <span class="option-letter">A</span>
+          <span>Leifson's method</span>
+        </button>
+        <button class="option-btn" id="opt-40-1" onclick="selectOption(40, 1)">
+          <span class="option-letter">B</span>
+          <span>Schaeffer-Fulton procedure</span>
+        </button>
+        <button class="option-btn" id="opt-40-2" onclick="selectOption(40, 2)">
+          <span class="option-letter">C</span>
+          <span>Gram's method</span>
+        </button>
+        <button class="option-btn" id="opt-40-3" onclick="selectOption(40, 3)">
+          <span class="option-letter">D</span>
+          <span>India ink negative stain</span>
+        </button></div>
+      <div class="rationale-box" id="rat-40">
+        <strong>Scientific Explanation:</strong> The Schaeffer-Fulton procedure is the most commonly employed method for spore staining.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-41">
+      <div class="q-meta">
+        <span class="q-number">Question 42 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">In the Schaeffer-Fulton endospore staining method, which primary dye and concentration are used?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-41-0" onclick="selectOption(41, 0)">
+          <span class="option-letter">A</span>
+          <span>1% crystal violet</span>
+        </button>
+        <button class="option-btn" id="opt-41-1" onclick="selectOption(41, 1)">
+          <span class="option-letter">B</span>
+          <span>5% malachite green</span>
+        </button>
+        <button class="option-btn" id="opt-41-2" onclick="selectOption(41, 2)">
+          <span class="option-letter">C</span>
+          <span>0.5% safranin</span>
+        </button>
+        <button class="option-btn" id="opt-41-3" onclick="selectOption(41, 3)">
+          <span class="option-letter">D</span>
+          <span>2% nigrosine</span>
+        </button></div>
+      <div class="rationale-box" id="rat-41">
+        <strong>Scientific Explanation:</strong> Schaeffer-Fulton uses 5% malachite green applied to a heat-fixed smear and heated to steaming for approx. 5 minutes.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-42">
+      <div class="q-meta">
+        <span class="q-number">Question 43 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">How does the Schaeffer-Fulton spore stain differ from the Modified Ziehl-Neelsen spore stain regarding decolorization?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-42-0" onclick="selectOption(42, 0)">
+          <span class="option-letter">A</span>
+          <span>Schaeffer-Fulton uses acid-alcohol; Modified Ziehl-Neelsen uses acetone</span>
+        </button>
+        <button class="option-btn" id="opt-42-1" onclick="selectOption(42, 1)">
+          <span class="option-letter">B</span>
+          <span>Modified Ziehl-Neelsen uses ethanol for decolorization, whereas Schaeffer-Fulton does NOT use ethanol decolorization (water washes out the dye from vegetative cells)</span>
+        </button>
+        <button class="option-btn" id="opt-42-2" onclick="selectOption(42, 2)">
+          <span class="option-letter">C</span>
+          <span>Both use 10% sulfuric acid</span>
+        </button>
+        <button class="option-btn" id="opt-42-3" onclick="selectOption(42, 3)">
+          <span class="option-letter">D</span>
+          <span>Schaeffer-Fulton uses xylene as a decolorizer</span>
+        </button></div>
+      <div class="rationale-box" id="rat-42">
+        <strong>Scientific Explanation:</strong> The lecture notes that the main difference between the two methods is NOT using decolorization with ethanol in the second (Schaeffer-Fulton) method (tap water rinses malachite green from vegetative cells).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-43">
+      <div class="q-meta">
+        <span class="q-number">Question 44 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">In a properly completed Schaeffer-Fulton stain, what colors do the endospores and vegetative cells exhibit respectively?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-43-0" onclick="selectOption(43, 0)">
+          <span class="option-letter">A</span>
+          <span>Endospores: red; Vegetative cells: green</span>
+        </button>
+        <button class="option-btn" id="opt-43-1" onclick="selectOption(43, 1)">
+          <span class="option-letter">B</span>
+          <span>Endospores: green; Vegetative cells: red/pink</span>
+        </button>
+        <button class="option-btn" id="opt-43-2" onclick="selectOption(43, 2)">
+          <span class="option-letter">C</span>
+          <span>Endospores: blue; Vegetative cells: red</span>
+        </button>
+        <button class="option-btn" id="opt-43-3" onclick="selectOption(43, 3)">
+          <span class="option-letter">D</span>
+          <span>Endospores: colorless; Vegetative cells: purple</span>
+        </button></div>
+      <div class="rationale-box" id="rat-43">
+        <strong>Scientific Explanation:</strong> Endospores retain the primary stain (5% malachite green) and appear green, while vegetative cells are counterstained red with safranin.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-44">
+      <div class="q-meta">
+        <span class="q-number">Question 45 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What is the specific purpose of steaming the slide for approximately 5 minutes during the Schaeffer-Fulton procedure?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-44-0" onclick="selectOption(44, 0)">
+          <span class="option-letter">A</span>
+          <span>To kill the vegetative cells so they dissolve</span>
+        </button>
+        <button class="option-btn" id="opt-44-1" onclick="selectOption(44, 1)">
+          <span class="option-letter">B</span>
+          <span>To enhance penetration of malachite green into the relatively impermeable spore coats</span>
+        </button>
+        <button class="option-btn" id="opt-44-2" onclick="selectOption(44, 2)">
+          <span class="option-letter">C</span>
+          <span>To evaporate the safranin counterstain</span>
+        </button>
+        <button class="option-btn" id="opt-44-3" onclick="selectOption(44, 3)">
+          <span class="option-letter">D</span>
+          <span>To fix the capsule to the glass slide</span>
+        </button></div>
+      <div class="rationale-box" id="rat-44">
+        <strong>Scientific Explanation:</strong> N.B.: Steaming is done to enhance the penetration of the dye into the relatively impermeable spore coats.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-45">
+      <div class="q-meta">
+        <span class="q-number">Question 46 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">If a modified Ziehl-Neelsen method is used to stain endospores instead of acid-fast bacteria, what modification is made to the decolorizer?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-45-0" onclick="selectOption(45, 0)">
+          <span class="option-letter">A</span>
+          <span>Water replaces acid-alcohol</span>
+        </button>
+        <button class="option-btn" id="opt-45-1" onclick="selectOption(45, 1)">
+          <span class="option-letter">B</span>
+          <span>Ethanol is used instead of acid-alcohol</span>
+        </button>
+        <button class="option-btn" id="opt-45-2" onclick="selectOption(45, 2)">
+          <span class="option-letter">C</span>
+          <span>Acetone replaces carbol-fuchsin</span>
+        </button>
+        <button class="option-btn" id="opt-45-3" onclick="selectOption(45, 3)">
+          <span class="option-letter">D</span>
+          <span>Phenol is omitted</span>
+        </button></div>
+      <div class="rationale-box" id="rat-45">
+        <strong>Scientific Explanation:</strong> The modified Ziehl-Neelsen method for spores is similar to the acid-fast stain, but ethanol is used instead of acid-alcohol for decolorization.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-46">
+      <div class="q-meta">
+        <span class="q-number">Question 47 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which two stains are specifically used in the negative staining technique to demonstrate bacterial capsules and Spirochetes?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-46-0" onclick="selectOption(46, 0)">
+          <span class="option-letter">A</span>
+          <span>Malachite green and safranin</span>
+        </button>
+        <button class="option-btn" id="opt-46-1" onclick="selectOption(46, 1)">
+          <span class="option-letter">B</span>
+          <span>India ink and nigrosine</span>
+        </button>
+        <button class="option-btn" id="opt-46-2" onclick="selectOption(46, 2)">
+          <span class="option-letter">C</span>
+          <span>Crystal violet and iodine</span>
+        </button>
+        <button class="option-btn" id="opt-46-3" onclick="selectOption(46, 3)">
+          <span class="option-letter">D</span>
+          <span>Carbol fuchsin and methylene blue</span>
+        </button></div>
+      <div class="rationale-box" id="rat-46">
+        <strong>Scientific Explanation:</strong> Capsule stain (negative staining) uses India ink and nigrosine to darken the background.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-47">
+      <div class="q-meta">
+        <span class="q-number">Question 48 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">Why is NO heat fixation applied during the negative (capsule) staining procedure?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-47-0" onclick="selectOption(47, 0)">
+          <span class="option-letter">A</span>
+          <span>India ink is highly flammable</span>
+        </button>
+        <button class="option-btn" id="opt-47-1" onclick="selectOption(47, 1)">
+          <span class="option-letter">B</span>
+          <span>Heat shrinks or destroys the delicate bacterial capsule and distorts cell size/shape</span>
+        </button>
+        <button class="option-btn" id="opt-47-2" onclick="selectOption(47, 2)">
+          <span class="option-letter">C</span>
+          <span>Heat causes nigrosine to turn colorless</span>
+        </button>
+        <button class="option-btn" id="opt-47-3" onclick="selectOption(47, 3)">
+          <span class="option-letter">D</span>
+          <span>Heat causes spores to germinate</span>
+        </button></div>
+      <div class="rationale-box" id="rat-47">
+        <strong>Scientific Explanation:</strong> Since no heat is applied in negative staining, the capsule is preserved without shrinkage and the exact shape and size of the organism can be determined.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-48">
+      <div class="q-meta">
+        <span class="q-number">Question 49 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Under the microscope, how do capsulated bacteria appear in a successful negative stain?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-48-0" onclick="selectOption(48, 0)">
+          <span class="option-letter">A</span>
+          <span>Dark black cells on a bright white background</span>
+        </button>
+        <button class="option-btn" id="opt-48-1" onclick="selectOption(48, 1)">
+          <span class="option-letter">B</span>
+          <span>Refractile (transparent) bodies surrounded by a clear halo/zone against a dark background</span>
+        </button>
+        <button class="option-btn" id="opt-48-2" onclick="selectOption(48, 2)">
+          <span class="option-letter">C</span>
+          <span>Bright green cells inside a red ring</span>
+        </button>
+        <button class="option-btn" id="opt-48-3" onclick="selectOption(48, 3)">
+          <span class="option-letter">D</span>
+          <span>Purple cells with blue capsules</span>
+        </button></div>
+      <div class="rationale-box" id="rat-48">
+        <strong>Scientific Explanation:</strong> Capsulated bacteria show as refractile bodies (transparent) surrounded by a clear zone against a dark background.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-49">
+      <div class="q-meta">
+        <span class="q-number">Question 50 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Besides demonstrating bacterial capsules, which group of thin, difficult-to-stain bacteria is classically examined using negative staining?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-49-0" onclick="selectOption(49, 0)">
+          <span class="option-letter">A</span>
+          <span>Spirochetes</span>
+        </button>
+        <button class="option-btn" id="opt-49-1" onclick="selectOption(49, 1)">
+          <span class="option-letter">B</span>
+          <span>Mycobacteria</span>
+        </button>
+        <button class="option-btn" id="opt-49-2" onclick="selectOption(49, 2)">
+          <span class="option-letter">C</span>
+          <span>Clostridia</span>
+        </button>
+        <button class="option-btn" id="opt-49-3" onclick="selectOption(49, 3)">
+          <span class="option-letter">D</span>
+          <span>Staphylococci</span>
+        </button></div>
+      <div class="rationale-box" id="rat-49">
+        <strong>Scientific Explanation:</strong> Negative staining is used for examining organisms that are difficult to stain with basic dyes, such as Spirochetes.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-50">
+      <div class="q-meta">
+        <span class="q-number">Question 51 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">Why does nigrosine fail to penetrate the bacterial cell or capsule in negative staining?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-50-0" onclick="selectOption(50, 0)">
+          <span class="option-letter">A</span>
+          <span>Its molecules are too large and negatively charged (acidic), so they are repelled by the negatively charged bacterial surface</span>
+        </button>
+        <button class="option-btn" id="opt-50-1" onclick="selectOption(50, 1)">
+          <span class="option-letter">B</span>
+          <span>It is insoluble in water</span>
+        </button>
+        <button class="option-btn" id="opt-50-2" onclick="selectOption(50, 2)">
+          <span class="option-letter">C</span>
+          <span>It reacts chemically with mycolic acid</span>
+        </button>
+        <button class="option-btn" id="opt-50-3" onclick="selectOption(50, 3)">
+          <span class="option-letter">D</span>
+          <span>It is neutralized by air drying</span>
+        </button></div>
+      <div class="rationale-box" id="rat-50">
+        <strong>Scientific Explanation:</strong> Acidic stains like nigrosine have negatively charged chromogens that are repelled by the negatively charged bacterial cell surface, staining only the background.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-51">
+      <div class="q-meta">
+        <span class="q-number">Question 52 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Which staining method is widely used in bacteriological laboratories specifically to visualize bacterial flagella?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-51-0" onclick="selectOption(51, 0)">
+          <span class="option-letter">A</span>
+          <span>Schaefer-Fulton method</span>
+        </button>
+        <button class="option-btn" id="opt-51-1" onclick="selectOption(51, 1)">
+          <span class="option-letter">B</span>
+          <span>Leifson's method</span>
+        </button>
+        <button class="option-btn" id="opt-51-2" onclick="selectOption(51, 2)">
+          <span class="option-letter">C</span>
+          <span>Ziehl-Neelsen method</span>
+        </button>
+        <button class="option-btn" id="opt-51-3" onclick="selectOption(51, 3)">
+          <span class="option-letter">D</span>
+          <span>Gram's method</span>
+        </button></div>
+      <div class="rationale-box" id="rat-51">
+        <strong>Scientific Explanation:</strong> In the bacteriological lab, Leifson's method is widely used for flagella staining.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-52">
+      <div class="q-meta">
+        <span class="q-number">Question 53 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">Why is flagella staining considered technically demanding and not undertaken lightly in routine labs?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-52-0" onclick="selectOption(52, 0)">
+          <span class="option-letter">A</span>
+          <span>Flagella are extremely delicate and require meticulous care in preparing cultures, smears, and reagents</span>
+        </button>
+        <button class="option-btn" id="opt-52-1" onclick="selectOption(52, 1)">
+          <span class="option-letter">B</span>
+          <span>Flagella only exist in dead bacteria</span>
+        </button>
+        <button class="option-btn" id="opt-52-2" onclick="selectOption(52, 2)">
+          <span class="option-letter">C</span>
+          <span>The dyes used are radioactive</span>
+        </button>
+        <button class="option-btn" id="opt-52-3" onclick="selectOption(52, 3)">
+          <span class="option-letter">D</span>
+          <span>Flagella dissolve in distilled water</span>
+        </button></div>
+      <div class="rationale-box" id="rat-52">
+        <strong>Scientific Explanation:</strong> Flagella staining requires extreme care in the preparation of the culture, smears, and reagents because flagella are fragile and easily sheared.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-53">
+      <div class="q-meta">
+        <span class="q-number">Question 54 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">What is considered the MOST satisfactory method for accurately determining the mode of bacterial flagellation?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-53-0" onclick="selectOption(53, 0)">
+          <span class="option-letter">A</span>
+          <span>Simple staining with methylene blue</span>
+        </button>
+        <button class="option-btn" id="opt-53-1" onclick="selectOption(53, 1)">
+          <span class="option-letter">B</span>
+          <span>Electron microscopy</span>
+        </button>
+        <button class="option-btn" id="opt-53-2" onclick="selectOption(53, 2)">
+          <span class="option-letter">C</span>
+          <span>Negative staining with India ink</span>
+        </button>
+        <button class="option-btn" id="opt-53-3" onclick="selectOption(53, 3)">
+          <span class="option-letter">D</span>
+          <span>Gram staining</span>
+        </button></div>
+      <div class="rationale-box" id="rat-53">
+        <strong>Scientific Explanation:</strong> The most satisfactory method of determining the mode of bacterial flagellation is by electron microscopy.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-54">
+      <div class="q-meta">
+        <span class="q-number">Question 55 of 60</span>
+        <span class="difficulty-tag diff-medium">Medium</span>
+      </div>
+      <div class="q-text">In routine diagnostic bacteriology, how is the presence of flagella most commonly inferred without performing complex flagella stains?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-54-0" onclick="selectOption(54, 0)">
+          <span class="option-letter">A</span>
+          <span>By observing endospore location</span>
+        </button>
+        <button class="option-btn" id="opt-54-1" onclick="selectOption(54, 1)">
+          <span class="option-letter">B</span>
+          <span>By observing bacterial motility</span>
+        </button>
+        <button class="option-btn" id="opt-54-2" onclick="selectOption(54, 2)">
+          <span class="option-letter">C</span>
+          <span>By measuring Gram-variability</span>
+        </button>
+        <button class="option-btn" id="opt-54-3" onclick="selectOption(54, 3)">
+          <span class="option-letter">D</span>
+          <span>By testing acid-fastness</span>
+        </button></div>
+      <div class="rationale-box" id="rat-54">
+        <strong>Scientific Explanation:</strong> Because of the difficulties of flagella staining methods, the presence of flagella is commonly inferred from the observation of motility.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-55">
+      <div class="q-meta">
+        <span class="q-number">Question 56 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">Compare the chemical principles of Simple, Gram, and Negative staining: Which statement is scientifically accurate?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-55-0" onclick="selectOption(55, 0)">
+          <span class="option-letter">A</span>
+          <span>Simple and Gram stains rely on basic (cationic) dyes binding negatively charged cell components, whereas Negative staining uses acidic (anionic) dyes repelled by the cell</span>
+        </button>
+        <button class="option-btn" id="opt-55-1" onclick="selectOption(55, 1)">
+          <span class="option-letter">B</span>
+          <span>All three use acidic dyes exclusively</span>
+        </button>
+        <button class="option-btn" id="opt-55-2" onclick="selectOption(55, 2)">
+          <span class="option-letter">C</span>
+          <span>Negative staining uses basic dyes with a mordant</span>
+        </button>
+        <button class="option-btn" id="opt-55-3" onclick="selectOption(55, 3)">
+          <span class="option-letter">D</span>
+          <span>Gram staining uses no basic dyes</span>
+        </button></div>
+      <div class="rationale-box" id="rat-55">
+        <strong>Scientific Explanation:</strong> Basic dyes (crystal violet, safranin, methylene blue) bind negatively charged bacterial components, while acidic dyes (nigrosine) are repelled and stain the background.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-56">
+      <div class="q-meta">
+        <span class="q-number">Question 57 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">A clinical microbiology student examines four unknown slides: Slide 1 shows green ovals inside pink rods; Slide 2 shows red rods on a blue background; Slide 3 shows clear halos around cells on a black background; Slide 4 shows purple cocci in clusters. Match Slides 1 to 4 with their respective staining techniques:</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-56-0" onclick="selectOption(56, 0)">
+          <span class="option-letter">A</span>
+          <span>1: Spore stain, 2: Acid-fast stain, 3: Capsule stain, 4: Gram stain</span>
+        </button>
+        <button class="option-btn" id="opt-56-1" onclick="selectOption(56, 1)">
+          <span class="option-letter">B</span>
+          <span>1: Acid-fast stain, 2: Spore stain, 3: Gram stain, 4: Capsule stain</span>
+        </button>
+        <button class="option-btn" id="opt-56-2" onclick="selectOption(56, 2)">
+          <span class="option-letter">C</span>
+          <span>1: Capsule stain, 2: Gram stain, 3: Acid-fast stain, 4: Spore stain</span>
+        </button>
+        <button class="option-btn" id="opt-56-3" onclick="selectOption(56, 3)">
+          <span class="option-letter">D</span>
+          <span>1: Gram stain, 2: Capsule stain, 3: Spore stain, 4: Acid-fast stain</span>
+        </button></div>
+      <div class="rationale-box" id="rat-56">
+        <strong>Scientific Explanation:</strong> Green spores/pink cells = Schaeffer-Fulton; Red bacilli/blue background = Ziehl-Neelsen; Clear halo/black background = Negative capsule stain; Purple cocci = Gram stain.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-57">
+      <div class="q-meta">
+        <span class="q-number">Question 58 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">Which of the following staining procedures does NOT involve heat at any step (neither during smear fixation nor during dye application)?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-57-0" onclick="selectOption(57, 0)">
+          <span class="option-letter">A</span>
+          <span>Ziehl-Neelsen acid-fast stain</span>
+        </button>
+        <button class="option-btn" id="opt-57-1" onclick="selectOption(57, 1)">
+          <span class="option-letter">B</span>
+          <span>Schaeffer-Fulton spore stain</span>
+        </button>
+        <button class="option-btn" id="opt-57-2" onclick="selectOption(57, 2)">
+          <span class="option-letter">C</span>
+          <span>Capsule stain (negative staining)</span>
+        </button>
+        <button class="option-btn" id="opt-57-3" onclick="selectOption(57, 3)">
+          <span class="option-letter">D</span>
+          <span>Gram stain</span>
+        </button></div>
+      <div class="rationale-box" id="rat-57">
+        <strong>Scientific Explanation:</strong> Gram stain uses heat fixation; Ziehl-Neelsen and Schaeffer-Fulton use both heat fixation and steaming. Only Negative (capsule) staining avoids heat entirely.
+      </div>
+    </div>
+    <div class="question-card" id="q-card-58">
+      <div class="q-meta">
+        <span class="q-number">Question 59 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">In both the Ziehl-Neelsen acid-fast stain and the Schaeffer-Fulton spore stain, what common physical challenge must be overcome during the primary staining step?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-58-0" onclick="selectOption(58, 0)">
+          <span class="option-letter">A</span>
+          <span>High water solubility of the cell wall</span>
+        </button>
+        <button class="option-btn" id="opt-58-1" onclick="selectOption(58, 1)">
+          <span class="option-letter">B</span>
+          <span>Low permeability of hydrophobic/dense outer barriers (mycolic acid vs. spore coat) requiring steaming</span>
+        </button>
+        <button class="option-btn" id="opt-58-2" onclick="selectOption(58, 2)">
+          <span class="option-letter">C</span>
+          <span>Rapid autolysis of the nucleus</span>
+        </button>
+        <button class="option-btn" id="opt-58-3" onclick="selectOption(58, 3)">
+          <span class="option-letter">D</span>
+          <span>Excessive positive charge of the cytoplasm</span>
+        </button></div>
+      <div class="rationale-box" id="rat-58">
+        <strong>Scientific Explanation:</strong> Both techniques require steaming (~5 minutes) to drive the primary stain through a highly resistant, impermeable barrier (waxy mycolic acid or keratin-like spore coat).
+      </div>
+    </div>
+    <div class="question-card" id="q-card-59">
+      <div class="q-meta">
+        <span class="q-number">Question 60 of 60</span>
+        <span class="difficulty-tag diff-hard">Hard</span>
+      </div>
+      <div class="q-text">If a researcher discovers a novel bacterium that is Gram-non-reactive, lacks mycolic acid, forms no endospores, and possesses delicate helical morphology best observed without heat distortion, which staining technique from Lecture 5 is most appropriate?</div>
+      <div class="options-list">
+        <button class="option-btn" id="opt-59-0" onclick="selectOption(59, 0)">
+          <span class="option-letter">A</span>
+          <span>Schaeffer-Fulton spore stain</span>
+        </button>
+        <button class="option-btn" id="opt-59-1" onclick="selectOption(59, 1)">
+          <span class="option-letter">B</span>
+          <span>Negative staining using India ink or nigrosine</span>
+        </button>
+        <button class="option-btn" id="opt-59-2" onclick="selectOption(59, 2)">
+          <span class="option-letter">C</span>
+          <span>Modified Ziehl-Neelsen stain</span>
+        </button>
+        <button class="option-btn" id="opt-59-3" onclick="selectOption(59, 3)">
+          <span class="option-letter">D</span>
+          <span>Simple stain after prolonged heat fixation</span>
+        </button></div>
+      <div class="rationale-box" id="rat-59">
+        <strong>Scientific Explanation:</strong> Organisms like Spirochetes are Gram-non-reactive, helical, and delicate; negative staining (India ink/nigrosine) without heat preserves their exact shape and size.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-card">
+    <div class="copyright">Prepared by ANS. Mira Algryani</div>
+    <div>All Rights Reserved • Bacterial Staining Study Edition</div>
+  </div>
+</div>
+
+<script>
+const answersKey = [1, 2, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1, 3, 1, 2, 1, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 2, 1, 1];
+let score = 0;
+let answered = 0;
+const done = new Array(answersKey.length).fill(false);
+
+function updateStats() {
+  document.getElementById("answered-count").textContent = answered;
+  document.getElementById("score-count").textContent = score;
+}
+
+function selectOption(qIdx, oIdx) {
+  if (done[qIdx]) return;
+  done[qIdx] = true;
+  answered++;
+  const rightIdx = answersKey[qIdx];
+  const btns = document.querySelectorAll("#q-card-" + qIdx + " .option-btn");
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === rightIdx) b.classList.add("correct");
+    else if (i === oIdx) b.classList.add("wrong");
+  });
+  if (oIdx === rightIdx) score++;
+  document.getElementById("rat-" + qIdx).style.display = "block";
+  updateStats();
+}
+
+function revealAll() {
+  answersKey.forEach((rightIdx, qIdx) => {
+    const btns = document.querySelectorAll("#q-card-" + qIdx + " .option-btn");
+    btns.forEach((b, i) => {
+      b.disabled = true;
+      if (i === rightIdx) b.classList.add("correct");
+    });
+    document.getElementById("rat-" + qIdx).style.display = "block";
+  });
+}
+
+function resetQuiz() {
+  score = 0;
+  answered = 0;
+  done.fill(false);
+  document.querySelectorAll(".option-btn").forEach(b => {
+    b.disabled = false;
+    b.classList.remove("correct", "wrong");
+  });
+  document.querySelectorAll(".rationale-box").forEach(r => r.style.display = "none");
+  updateStats();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+</script>
+</body>
+</html>
